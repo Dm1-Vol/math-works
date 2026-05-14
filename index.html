@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои математические работы</title>
+    <style>
+        /* ОБЩИЕ СТИЛИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* КОНТЕЙНЕР */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* ===== ХЕДЕР ===== */
+        header {
+            background: linear-gradient(135deg, #2c3e66 0%, #1a4d8c 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .logo a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* НАВИГАЦИЯ */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: opacity 0.2s;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        /* ВЫПАДАЮЩЕЕ МЕНЮ */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropbtn {
+            background: none;
+            border: none;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 8px 0;
+            font-family: inherit;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 16px;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+        main {
+            flex: 1;
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e66;
+            border-left: 4px solid #2c3e66;
+            padding-left: 20px;
+        }
+        
+        h2 {
+            margin: 30px 0 15px 0;
+            color: #2c3e66;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* ССЫЛКА НА КАФЕДРУ */
+        .dept-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c3e66 0%, #1a4d8c 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: transform 0.2s, background 0.2s;
+        }
+        
+        .dept-link:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #1a4d8c 0%, #2c3e66 100%);
+        }
+        
+        /* ИЛЛЮСТРАЦИИ */
+        figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        figcaption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        /* ===== ФУТЕР ===== */
+        footer {
+            background: #2c3e66;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: #aaa;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: white;
+        }
+        
+        /* СТРЕЛКА НАВЕРХ */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2c3e66;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+            z-index: 99;
+        }
+        
+        #scrollTopBtn:hover {
+            background: #1a4d8c;
+        }
+        
+        /* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+            }
+            .dropdown-content {
+                position: static;
+                background: #eef2f7;
+                box-shadow: none;
+            }
+            .dropdown-content a {
+                color: #2c3e66;
+            }
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            h1 {
+                font-size: 1.6rem;
+                padding-left: 15px;
+            }
+            .container {
+                padding: 0 15px;
+            }
+            main {
+                padding: 25px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <a href="index.html">📐 Математические работы</a>
+        </div>
+        <nav>
+            <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li class="dropdown">
+        <button class="dropbtn">Мои задачи ▼</button>
+        <div class="dropdown-content">
+            <a href="task1.html">Диаграммы импликаций.</a>
+            <a href="task2.html">Теория моделей.</a>
+            <a href="task3.html">Анимации в manim</a>
+            <a href="task4.html">Формализация в Coq</a>
+        </div>
+    </li>
+</ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Математические работы</h1>
+        
+        <div class="section">
+            <h2>Добро пожаловать на мой сайт!</h2>
+            <p>Здесь представлены мои математические работы. В основном я интересуюсь математической логикой, но здесь можно найти и другие темы, например физику и анимации в manim.</p>
+            
+            <!-- ССЫЛКА НА КАФЕДРУ (ОБЯЗАТЕЛЬНАЯ) -->
+            <div style="margin: 25px 0 10px 0;">
+                <a href="https://old.vogu35.ru/institut/imekn/kaf-pm" class="dept-link" target="_blank">📖 Кафедра прикладной математики</a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Основные направления</h2>
+            <ul>
+                <li><a href="task1.html"> Диаграммы импликаций.</a>.</li>
+                <li><a href="task2.html"> Теория моделей.</a>.</li>
+                <li><a href="task3.html"> Анимации в manim. Визуализация уравнения Эйнштейна.</a>.</li>
+                <li><a href="task4.html"> Формализация доказательств в Rocq.</a>.</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной матемтаики</p>
+        <p>📧 <a href="mailto:volynkinmitya@yandex.com">volynkinmitya@yandex.com</a></p>
+        <p>© 2026 | <a href=https://vogu35.ru/">Вологодский государственный университет</a></p>
+    </div>
+</footer>
+
+<button id="scrollTopBtn" title="Наверх">↑</button>
+
+<script>
+    // СТРЕЛКА НАВЕРХ
+    const scrollBtn = document.getElementById("scrollTopBtn");
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            scrollBtn.style.display = "block";
+        } else {
+            scrollBtn.style.display = "none";
+        }
+    };
+    scrollBtn.onclick = function() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+</script>
+
+</body>
+</html>

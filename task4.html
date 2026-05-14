@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Формализация в Coq - Мои математические работы</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <style>
+        /* копируем все стили из index.html (те же самые) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: linear-gradient(135deg, #2c3e66 0%, #1a4d8c 100%); color: white; padding: 1rem 0; position: sticky; top: 0; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .logo a { color: white; text-decoration: none; font-size: 1.5rem; font-weight: bold; }
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { color: white; text-decoration: none; }
+        .dropdown { position: relative; }
+        .dropbtn { background: none; border: none; color: white; font-size: 1rem; cursor: pointer; }
+        .dropdown-content { display: none; position: absolute; background: white; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; top: 100%; left: 0; z-index: 1; }
+        .dropdown-content a { color: #333; padding: 10px 16px; display: block; text-decoration: none; }
+        .dropdown-content a:hover { background: #f0f0f0; }
+        .dropdown:hover .dropdown-content { display: block; }
+        main { flex: 1; padding: 40px 0; }
+        h1 { font-size: 2rem; margin-bottom: 20px; color: #2c3e66; border-left: 4px solid #2c3e66; padding-left: 20px; }
+        h2 { margin: 30px 0 15px; color: #2c3e66; }
+        .section { background: white; border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 14px; margin: 15px 0; }
+        footer { background: #2c3e66; color: white; text-align: center; padding: 25px 0; margin-top: 40px; }
+        footer a { color: #aaa; text-decoration: none; }
+        #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #2c3e66; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; }
+        @media (max-width: 768px) { .header-container { flex-direction: column; text-align: center; } nav ul { justify-content: center; gap: 15px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <div class="logo">
+            <a href="index.html">📐 Математические работы</a>
+        </div>
+        <nav>
+            <ul>
+    <li><a href="index.html">Главная</a></li>
+    <li class="dropdown">
+        <button class="dropbtn">Мои задачи ▼</button>
+        <div class="dropdown-content">
+            <a href="task1.html">Диаграммы импликаций.</a>
+            <a href="task2.html">Теория моделей.</a>
+            <a href="task3.html">Анимации в manim</a>
+            <a href="task4.html">Формализация в Coq</a>
+        </div>
+    </li>
+</ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h1>Формализация доказательств в Coq</h1>
+        
+        <div class="section">
+            <h2>О проекте</h2>
+            <p>Coq — это интерактивная система верификации доказательств. Я формализовал в ней некоторые результаты о запирающих отношениях. Это позволяет гарантировать математическую корректность доказательств и даёт возможность машинной проверки.</p>
+        </div>
+        
+        <div class="section">
+            <h2>Доказательство нижней границы.</h2>
+            <pre>
+            Axiom LEM : forall P : Prop, P \/ not P.
+            Axiom A : Set.
+            Axiom Ord : A -> A -> Prop.
+            Axiom Ord_ref : forall a : A, Ord a a.
+            Axiom Ord_trans : forall a : A, forall b : A, forall c : A, Ord a b -> Ord b c -> Ord a c.
+            Axiom Ord_antisym : forall a : A, forall b : A, Ord a b -> Ord b a -> a=b.
+            Axiom B : A -> A -> Prop.
+            Axiom Block : (forall a : A, forall b : A, (B a b) -> not (Ord a b)) /\ (forall a : A, forall b : A, (not (Ord a b)) -> exists x : A, exists y : A, (Ord x a) /\ (Ord b y) /\ (B x y)).
+            Definition S : A -> (A -> A -> Prop) := fun a : A => fun x : A => fun y : A => (B x y) /\ (Ord x a).
+            Lemma nleq : forall a : A, forall b : A, (a<>b) -> ((not (Ord a b)) \/ (not (Ord b a))).
+            Proof.
+            intro.
+            intro.
+            intro.
+            case (LEM (Ord a b)).
+            intro.
+            right.
+            intro.
+            exact(H (Ord_antisym a b H0 H1)).
+            intro.
+            left.
+            exact(H0).
+            Qed.
+            Theorem S_inj : forall a : A, forall b : A, a<>b -> (exists x : A, exists y : A, (S a x y) /\ not (S b x y)) \/ (exists x : A, exists y : A, (S b x y) /\ not (S a x y)).
+            Proof.
+            intro.
+            intro.
+            intro.
+            case (nleq a b H).
+            intro.
+            destruct ((proj2 Block) a b H0) as [x Hx].
+            destruct Hx as [y Hy].
+            left.
+            exists x.
+            exists y.
+            split.
+            unfold S.
+            split.
+            exact (proj2(proj2 Hy)).
+            exact(proj1 Hy).
+            intro.
+            unfold S in H1.
+            exact(((proj1 Block) x y) (proj2 (proj2 Hy)) (Ord_trans x b y (proj2 H1) (proj1(proj2 Hy)))).
+            intro.
+            destruct ((proj2 Block) b a H0) as [x Hx].
+            destruct Hx as [y Hy].
+            right.
+            exists x.
+            exists y.
+            split.
+            unfold S.
+            split.
+            exact (proj2(proj2 Hy)).
+            exact(proj1 Hy).
+            intro.
+            unfold S in H1.
+            Check(((proj1 Block) x y) (proj2 (proj2 Hy))).
+            exact ((((proj1 Block) x y) (proj2 (proj2 Hy))) (Ord_trans x a y (proj2 H1) (proj1(proj2 Hy)))).
+            Qed.
+            Theorem sub_B : forall a : A, forall x : A, forall y : A, (S a x y) -> B x y.
+            Proof.
+            firstorder.
+            Qed. 
+            </pre>
+            Доказательства будут добавляться по мере написания и формализации.
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной матемтаики</p>
+        <p>📧 <a href="mailto:volynkinmitya@yandex.com">volynkinmitya@yandex.com</a></p>
+        <p>© 2026 | <a href=https://vogu35.ru/">Вологодский государственный университет</a></p>
+    </div>
+</footer>
+
+<button id="scrollTopBtn">↑</button>
+
+<script>
+    const btn = document.getElementById("scrollTopBtn");
+    window.onscroll = () => btn.style.display = (document.documentElement.scrollTop > 300) ? "block" : "none";
+    btn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+</script>
+
+</body>
+</html>
