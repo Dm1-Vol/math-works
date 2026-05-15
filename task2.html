@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задача 1: Импликации - Мои математические работы</title>
+    <title>Лейбницевость второго порядка - Мои математические работы</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ MATHJAX ДЛЯ ФОРМУЛ -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     
     <style>
-        /* ВСЕ СТИЛИ ТЕ ЖЕ (скопируйте из предыдущего кода) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fa; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -21,7 +19,7 @@
         nav a:hover { opacity: 0.8; }
         .dropdown { position: relative; }
         .dropbtn { background: none; border: none; color: white; font-weight: 500; font-size: 1rem; cursor: pointer; padding: 8px 0; font-family: inherit; }
-        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; top: 100%; left: 0; z-index: 1; }
+        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 240px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; top: 100%; left: 0; z-index: 1; }
         .dropdown-content a { color: #333; padding: 10px 16px; display: block; }
         .dropdown-content a:hover { background-color: #f0f0f0; border-radius: 8px; }
         .dropdown:hover .dropdown-content { display: block; }
@@ -30,15 +28,14 @@
         h2 { margin: 30px 0 15px 0; color: #2c3e66; }
         .section { background: white; border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
         .section:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        figure { margin: 20px 0; text-align: center; }
-        img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        figcaption { font-size: 0.9rem; color: #666; margin-top: 8px; }
+        .theorem { background: #f0f7ff; border-left: 5px solid #2c3e66; padding: 15px 20px; margin: 20px 0; }
         footer { background: #2c3e66; color: white; text-align: center; padding: 25px 0; margin-top: 40px; }
-        footer a { color: #aaa; text-decoration: none; }
-        footer a:hover { color: white; }
-        #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #2c3e66; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: background 0.2s; z-index: 99; }
+        #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #2c3e66; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
         #scrollTopBtn:hover { background: #1a4d8c; }
-        @media (max-width: 768px) { .header-container { flex-direction: column; text-align: center; } nav ul { justify-content: center; gap: 15px; } .dropdown-content { position: static; background: #eef2f7; box-shadow: none; } .dropdown-content a { color: #2c3e66; } .dropdown:hover .dropdown-content { display: none; } h1 { font-size: 1.6rem; padding-left: 15px; } .container { padding: 0 15px; } main { padding: 25px 0; } }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; }
+            nav ul { justify-content: center; gap: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -50,50 +47,55 @@
         </div>
         <nav>
             <ul>
-    <li><a href="index.html">Главная</a></li>
-    <li class="dropdown">
-        <button class="dropbtn">Мои задачи ▼</button>
-        <div class="dropdown-content">
-            <a href="task1.html">Диаграммы импликаций.</a>
-            <a href="task2.html">Теория моделей.</a>
-            <a href="task3.html">Анимации в manim</a>
-            <a href="task4.html">Формализация в Coq</a>
-        </div>
-    </li>
-</ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <button class="dropbtn">Мои работы</button>
+                    <div class="dropdown-content">
+                        <a href="task1.html">Диаграммы импликаций</a>
+                        <a href="task2.html">Лейбницевость второго порядка</a>
+                        <a href="task3.html">Анимации в Manim</a>
+                        <a href="task4.html">Формализация в Coq</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
     </div>
 </header>
 
 <main>
     <div class="container">
-        <h1>Лейбницевость второго порядка и жёсткость.</h1>
+        <h1>Лейбницевость второго порядка и жёсткость</h1>
         
         <div class="section">
             <h2>Введение</h2>
-            <p>Исследуется связь между понятиями <strong>жёсткости</strong> и <strong>лейбнивости второго порядка</strong> для счётных структур в конечной сигнатуре.</p>
+            <p>Исследуется связь между понятиями <strong>жёсткости</strong> и <strong>лейбницевости второго порядка</strong> для счётных структур в конечной сигнатуре.</p>
         </div>
         
         <div class="section">
             <h2>Основные определения</h2>
-            <p><strong>Определение 1.</strong> Структура \( \mathcal{M} \) называется <strong>жёсткой</strong>, если она не имеет нетривиальных автоморфизмов, то есть единственным автоморфизмом является тождественное отображение.</p>
             
-            <p><strong>Определение 2.</strong> Структура \( \mathcal{M} \) называется <strong>лейбницевой второго порядка</strong>, если любые два различных элемента различимы некоторой формулой второго порядка без параметров. Иными словами, для любых \( a \neq b \) из \( M \) существует формула \( \psi(x) \) такая, что</p>
-            <p style="text-align: center;">\[ \mathcal{M} \models \psi(a) \quad \text{и} \quad \mathcal{M} \models \neg \psi(b). \]</p>
+            <div class="theorem">
+                <strong>Определение 1.</strong> Структура \( \mathcal{M} \) называется <strong>жёсткой</strong>, если она не имеет нетривиальных автоморфизмов, то есть единственным автоморфизмом является тождественное отображение.
+            </div>
+            
+            <div class="theorem">
+                <strong>Определение 2.</strong> Структура \( \mathcal{M} \) называется <strong>лейбницевой второго порядка</strong>, если любые два различных элемента различимы некоторой формулой второго порядка без параметров. Иными словами, для любых \( a \neq b \) из \( M \) существует формула \( \psi(x) \) такая, что
+                \[ \mathcal{M} \models \psi(a) \quad \text{и} \quad \mathcal{M} \models \neg \psi(b). \]
+            </div>
         </div>
         
         <div class="section">
             <h2>Гипотезы</h2>
             <p><strong>Гипотеза Карнапа.</strong> Если две счётные структуры в конечной сигнатуре имеют одинаковую теорию второго порядка, то они изоморфны.</p>
             
-            <p><strong>Гипотеза лейбницевости.</strong> Всякая счётная жёсткая структура в конечной сигнатуре является лейбницевской второго порядка.</p>
+            <p><strong>Гипотеза лейбницевости.</strong> Всякая счётная жёсткая структура в конечной сигнатуре является лейбницевой второго порядка.</p>
         </div>
         
         <div class="section">
             <h2>Независимость от ZFC</h2>
-            <p>Используя результат Айтая (Ajtai, 1979), можно показать, что гипотеза лейбницевости <strong>независима от ZFC</strong>.</p>
-            
-            <p><strong>Теорема 1.</strong> Гипотеза лейбницевости не может быть ни доказана, ни опровергнута в рамках теории множеств Цермело — Френкеля с аксиомой выбора (ZFC).</p>
+            <div class="theorem">
+                <strong>Теорема 1.</strong> Гипотеза лейбницевости не может быть ни доказана, ни опровергнута в рамках теории множеств Цермело — Френкеля с аксиомой выбора (ZFC).
+            </div>
         </div>
         
         <div class="section">
@@ -104,30 +106,30 @@
             <p><strong>Непротиворечивость отрицания.</strong> Рассмотрим структуры \( (\omega_2, <, a) \) для \( a < \omega_2 \) ( \( \omega_2 \) с отмеченным элементом). С помощью коллапса \( \omega_2 \) можно получить две структуры \( (\omega_2^{L}, <, a) \) и \( (\omega_2^{L}, <, b) \) с одинаковой теорией второго порядка, но различными выделенными элементами. Это даёт два неразличимых элемента в счётной структуре \( (\omega_2^{L}, <) \), что опровергает гипотезу лейбницевости. Следовательно, существует модель ZFC, в которой гипотеза ложна.</p>
         </div>
         
-        <div class="section">
-            <h2>Ссылка на оригинальный результат</h2>
-            <p>M. Ajtai, <em>Isomorphism and higher order equivalence</em>, Annals of Mathematical Logic 16, Issue 3 (1979) pp. 181-203.</p>
-            <p>DOI: <a href="https://doi.org/10.1016/0003-4843(79)90001-9" target="_blank">10.1016/0003-4843(79)90001-9</a></p>
-        </div>
         
         <div class="section">
             <h2>Открытые вопросы</h2>
-            <p><strong>Вопрос 1.</strong> Противоречит ли ZFC предположению, что все жёсткие структуры континуального размера (не только счётные) в конечной сигнатуре являются лейбницевскими второго порядка?</p>
+            <p><strong>Вопрос 1.</strong> Противоречит ли ZFC предположению, что все жёсткие структуры континуального размера (не только счётные) в конечной сигнатуре являются лейбницевыми второго порядка?</p>
             
             <p><strong>Вопрос 2.</strong> Следует ли из гипотезы лейбницевости гипотеза Карнапа?</p>
-            <p><a href="https://mathoverflow.net/questions/506971/is-it-inconsistent-for-all-rigid-continuum-sized-structures-to-be-second-order-l">Эти вопросы на MathOverflow.</a></p>
+            <p><a href="https://mathoverflow.net/questions/506971/is-it-inconsistent-for-all-rigid-continuum-sized-structures-to-be-second-order-l" target="_blank">Обсуждение этих вопросов на MathOverflow.</a></p>
+        </div>
+
+        <div class="section">
+            <h2>Ссылка на источники</h2>
+            <p>[1] M. Ajtai, <em>Isomorphism and higher order equivalence</em>, Annals of Mathematical Logic 16, Issue 3 (1979) pp. 181-203.</p>
+            <p>DOI: <a href="https://doi.org/10.1016/0003-4843(79)90001-9" target="_blank">10.1016/0003-4843(79)90001-9</a></p>
         </div>
     </div>
 </main>
 
 <footer>
     <div class="container">
-        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной матемтаики</p>
+        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной математики</p>
         <p>📧 <a href="mailto:volynkinmitya@yandex.com">volynkinmitya@yandex.com</a></p>
-        <p>© 2026 | <a href=https://vogu35.ru/">Вологодский государственный университет</a></p>
+        <p>© 2026 | <a href="https://vogu35.ru/">Вологодский государственный университет</a></p>
     </div>
 </footer>
-
 
 <button id="scrollTopBtn" title="Наверх">↑</button>
 
@@ -144,6 +146,5 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 </script>
-
 </body>
 </html>

@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Задача 1: Импликации - Мои математические работы</title>
+    <title>Диаграммы импликаций - Мои математические работы</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ MATHJAX ДЛЯ ФОРМУЛ -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
     
     <style>
-        /* ВСЕ СТИЛИ ТЕ ЖЕ (скопируйте из предыдущего кода) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fa; color: #333; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -21,25 +19,27 @@
         nav a:hover { opacity: 0.8; }
         .dropdown { position: relative; }
         .dropbtn { background: none; border: none; color: white; font-weight: 500; font-size: 1rem; cursor: pointer; padding: 8px 0; font-family: inherit; }
-        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; top: 100%; left: 0; z-index: 1; }
+        .dropdown-content { display: none; position: absolute; background-color: white; min-width: 240px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 8px; top: 100%; left: 0; z-index: 1; }
         .dropdown-content a { color: #333; padding: 10px 16px; display: block; }
         .dropdown-content a:hover { background-color: #f0f0f0; border-radius: 8px; }
         .dropdown:hover .dropdown-content { display: block; }
         main { flex: 1; padding: 40px 0; }
         h1 { font-size: 2rem; margin-bottom: 20px; color: #2c3e66; border-left: 4px solid #2c3e66; padding-left: 20px; }
         h2 { margin: 30px 0 15px 0; color: #2c3e66; }
+        h3 { margin: 25px 0 12px 0; color: #2c3e66; }
         .section { background: white; border-radius: 10px; padding: 25px; margin-bottom: 25px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
         .section:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .theorem { background: #f0f7ff; border-left: 5px solid #2c3e66; padding: 15px 20px; margin: 20px 0; }
         figure { margin: 20px 0; text-align: center; }
         img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         figcaption { font-size: 0.9rem; color: #666; margin-top: 8px; }
         footer { background: #2c3e66; color: white; text-align: center; padding: 25px 0; margin-top: 40px; }
-        footer a { color: #aaa; text-decoration: none; }
-        footer a:hover { color: white; }
-        #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #2c3e66; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: background 0.2s; z-index: 99; }
+        #scrollTopBtn { position: fixed; bottom: 30px; right: 30px; background: #2c3e66; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 24px; cursor: pointer; display: none; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
         #scrollTopBtn:hover { background: #1a4d8c; }
-        @media (max-width: 768px) { .header-container { flex-direction: column; text-align: center; } nav ul { justify-content: center; gap: 15px; } .dropdown-content { position: static; background: #eef2f7; box-shadow: none; } .dropdown-content a { color: #2c3e66; } .dropdown:hover .dropdown-content { display: none; } h1 { font-size: 1.6rem; padding-left: 15px; } .container { padding: 0 15px; } main { padding: 25px 0; } }
-        .section img { max-width: 600px; }
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; }
+            nav ul { justify-content: center; gap: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -51,17 +51,17 @@
         </div>
         <nav>
             <ul>
-    <li><a href="index.html">Главная</a></li>
-    <li class="dropdown">
-        <button class="dropbtn">Мои задачи ▼</button>
-        <div class="dropdown-content">
-            <a href="task1.html">Диаграммы импликаций.</a>
-            <a href="task2.html">Теория моделей.</a>
-            <a href="task3.html">Анимации в manim</a>
-            <a href="task4.html">Формализация в Coq</a>
-        </div>
-    </li>
-</ul>
+                <li><a href="index.html">Главная</a></li>
+                <li class="dropdown">
+                    <button class="dropbtn">Мои работы</button>
+                    <div class="dropdown-content">
+                        <a href="task1.html">Диаграммы импликаций</a>
+                        <a href="task2.html">Лейбницевость второго порядка</a>
+                        <a href="task3.html">Анимации в Manim</a>
+                        <a href="task4.html">Формализация в Coq (Rocq)</a>
+                    </div>
+                </li>
+            </ul>
         </nav>
     </div>
 </header>
@@ -74,49 +74,57 @@
             <h2>Постановка задачи</h2>
             <p>Дано множество утверждений. Между некоторыми из них установлены логические импликации (одно утверждение влечёт другое). <strong>Доказанные импликации</strong> — это те, для которых мы установили логический вывод. <strong>Опровергнутые импликации</strong> — это те, для которых предъявлен контрпример.</p>
             <p>Вопрос: как выглядит минимальный набор импликаций (доказанных и опровергнутых), из которого можно логически вывести или опровергнуть все остальные?</p>
-            <p>Задача относится к изучению порядков и предпорядков, так как любое множество утверждений образует предпорядок относительно импликации, а если нет эквивалентных, то просто порядок.</p>
+            <p>Задача относится к изучению порядков и предпорядков.</p>
         </div>
         
         <div class="section">
             <h2>Диаграммы Хассе и запирающие отношения</h2>
             <p>Для доказанных импликаций это по сути хорошо известное понятие диаграммы Хассе, для опровергнутых импликаций это менее изучено, я назвал это запирающим отношением.</p>
-            <p>Запирающее отношение можно опредлеить следующим образом: пусть \( \leq \) предпорядок, тогда отношение \( B \) запирающее, если оно лежит в дополнении \( \leq \) и для любых \( a, b\), таких, что \( a \nleq b \), \( Tr(\leq \cup \{ (a, b) \}) \cap B \neq \emptyset \). \( Tr\) обозначате транзитивное замыкание. Интуитивно: если мы попытаемся добавить ещё одну импликацию, то наткнёмся на что-то из запирающего множества.
+            
+            <p><strong>Определение.</strong> Пусть \( \leq \) — предпорядок, тогда отношение \( B \) запирающее, если оно лежит в дополнении \( \leq \) и для любых \( a, b \), таких, что \( a \nleq b \), \( \operatorname{Tr}(\leq \cup \{ (a, b) \}) \cap B \neq \emptyset \). \( \operatorname{Tr} \) обозначает транзитивное замыкание.</p>
+            
             <figure>
-                <img src="diagram.jpg" alt="Пример диаграммы Хассе и запирающего отношения (красные стрелки)." onerror="this.src='https://via.placeholder.com/400x250?text=Диаграмма+Хассе'">
+                <img src="diagram.jpg" alt="Пример диаграммы Хассе и запирающего отношения" onerror="this.src='https://via.placeholder.com/600x350?text=Диаграмма+Хассе'">
                 <figcaption>Рис. 1 — Пример диаграммы Хассе и запирающего отношения (красные стрелки).</figcaption>
             </figure>
         </div>
         
         <div class="section">
-            <h2>Нижняя граница для размера запирающего отношения в порядках.</h2>
-            <p><strong>Теорема:</strong> для порядков (то есть когда нет эквивалентных утверждений) наименьший размер запирающего отношения из \( n \) элеметов равен   \( \lceil log_2 n \rceil \)</p>
-            <p><strong>Доказательство:</strong>Пусть \( A \) — множество из \( n \) элеметнов и \( \leq \) порядок на нём. Можно показать, что любое запирающее отношение \( B\) обладает следующим свойством: если \( a \nleq b \), то существует пара \( (x, y)\) из \( B\), такая что \( x \leq a \) и \( b \leq y \) (потому что какая-то из стрелок \( (x, y)\) должна получаться композицией \( (a, b)\) и стрелок исходного порядка).</p>
-            <p>Теперь мы можем доказать нижнюю границу: \( A \) вкладывается в множество всех подмножеств \( B \). Сопоставим каждому \( a \in A \) множество \( \{ (x, y) \in B  | x \leq a \} \).</p>
-            <p>Докажем инъективность. Пусть у разных \( a \) и \( b \) эти множества совпадают. Без потери общности можно предположить \( a \nleq b \), тогда существует пара \( (x, y)\) из \( B\), такая что \( x \leq a \) и \( b \leq y \), но тогда \( x \leq b \) и \( b \leq y \), поэтому \( x \leq y \), но это противоречит тому, что эта пара лежит в \( B \). Отсюда и получаем границу: \( |A| \leq 2^{|B|} \). Граница достигается для множества всех подмножеств, упорядоченного по включению, как на иллюстрации выше.</p> 
-            <p><a href="task4.html">Это доказательство было формализованно и проверено в Coq</a></p>
+            <h2>Нижняя граница для размера запирающего отношения в порядках</h2>
+            
+            <div class="theorem">
+                <strong>Теорема:</strong> для порядков (то есть когда нет эквивалентных утверждений) наименьший размер запирающего отношения из \( n \) элементов равен \( \lceil \log_2 n \rceil \).
+            </div>
+            
+            <h3>Доказательство</h3>
+            <p>Пусть \( A \) — множество из \( n \) элементов и \( \leq \) — порядок на нём. Можно показать, что любое запирающее отношение \( B \) обладает следующим свойством: если \( a \nleq b \), то существует пара \( (x, y) \) из \( B \), такая что \( x \leq a \) и \( b \leq y \).</p>
+            
+            <p>Теперь мы можем доказать нижнюю границу: \( A \) вкладывается в множество всех подмножеств \( B \). Сопоставим каждому \( a \in A \) множество \( \{ (x, y) \in B \mid x \leq a \} \).</p>
+            
+            <p>Докажем инъективность. Пусть у разных \( a \) и \( b \) эти множества совпадают. Без потери общности можно предположить \( a \nleq b \), тогда существует пара \( (x, y) \) из \( B \), такая что \( x \leq a \) и \( b \leq y \), но тогда \( x \leq b \) и \( b \leq y \), поэтому \( x \leq y \), но это противоречит тому, что эта пара лежит в \( B \). Отсюда и получаем границу: \( |A| \leq 2^{|B|} \). Граница достигается для множества всех подмножеств, упорядоченного по включению.</p>
+            
+            <p><a href="task4.html">Это доказательство было формализовано и проверено в Coq (Rocq)</a></p>
         </div>
         
         <div class="section">
             <h2>Основные результаты исследования</h2>
             <ul>
                 <li><strong>Нижняя граница:</strong> доказана оценка минимального размера запирающего отношения для случайного набора импликаций.</li>
-                <li><strong>Аналог чисел Рамсея:</strong>, измеряющий, насколько сложно доказать полную структуру импликаций.</li>
-                <li><strong>Теорема существования:</strong> доказано, что для любого конечного набора неэквивалентных утверждений существует как диаграмма Хассе (для доказанных), так и наименьшее запирающее отношение (для опровергнутых). В бесконечном случае это не всегда так, но любой порядок может быть вложен в другой порядок, имеющий и диаграмму Хассе и наименьшее запирающее отношение.</li>
-          </ul>
-            Доказательства будут добавляться по ходу написания диплома.
+                <li><strong>Аналог чисел Рамсея:</strong> измеряющий, насколько сложно доказать полную структуру импликаций.</li>
+                <li><strong>Теорема существования:</strong> доказано, что для любого конечного набора неэквивалентных утверждений существует как диаграмма Хассе, так и наименьшее запирающее отношение.</li>
+            </ul>
+            <p>Доказательства будут добавляться по ходу написания диплома.</p>
         </div>
-        
     </div>
 </main>
 
 <footer>
     <div class="container">
-        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной матемтаики</p>
+        <p><strong>Дмитрий Волынкин</strong> — студент кафедры прикладной математики</p>
         <p>📧 <a href="mailto:volynkinmitya@yandex.com">volynkinmitya@yandex.com</a></p>
-        <p>© 2026 | <a href=https://vogu35.ru/">Вологодский государственный университет</a></p>
+        <p>© 2026 | <a href="https://vogu35.ru/">Вологодский государственный университет</a></p>
     </div>
 </footer>
-
 
 <button id="scrollTopBtn" title="Наверх">↑</button>
 
@@ -133,6 +141,5 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 </script>
-
 </body>
 </html>
